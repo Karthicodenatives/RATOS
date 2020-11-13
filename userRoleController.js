@@ -20,17 +20,15 @@ module.exports = (modalMap) => {
             return;
         }
 
-        const accountUserData = (typeof req.body.emailId === 'undefined')?JSON.parse(req.body):req.body;
+        const userRoleData = {};
 
-        accountUserData.user_role_id = uuidv4();
-        accountUserData.emailId  = emailId;
-        accountUserData.image_id = uuidv4();
-        accountUserData.role_id  = uuidv4();
+        userRoleData.user_role_id = uuidv4();
+        userRoleData.role_id  = uuidv4();
         
         /*audit Columns*/
-        addOnData.createdAt= moment().format('YYYY-MM-DD H:m:s');
+        userRoleData.createdAt= moment().format('YYYY-MM-DD H:m:s');
         /* Save Role User in the database */
-        userRole.create(accountUserData);
+        userRole.create(userRoleData);
         .then(data => {
             res.send(data);
         })

@@ -13,15 +13,15 @@ module.exports = (modalMap) => {
     */
     const createRole = async (req, res) => {
 
-        const accountUserData = (typeof req.body.emailId === 'undefined')?JSON.parse(req.body):req.body;
+        const roleData = {};
 
-        accountUserData.role_id   = uuidv4();
-        accountUserData.rolename  = req.body.rolename;
+        roleData.role_id   = uuidv4();
+        roleData.rolename  = req.body.rolename;
         
         /*audit Columns*/
-        addOnData.createdAt= moment().format('YYYY-MM-DD H:m:s');
+        roleData.createdAt= moment().format('YYYY-MM-DD H:m:s');
         /* Save Role the database */
-        roleTbl.create(accountUserData);
+        roleTbl.create(roleData);
         .then(data => {
             res.send(data);
         })
